@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterdatatype/resouse_page.dart';
 import 'package:flutterdatatype/stateful_group_page.dart';
 
+import 'app_lifeCycle.dart';
 import 'gestureDetector_page.dart';
 import 'launch_page.dart';
 import 'layout_group_page.dart';
 import 'less_group_page.dart';
+import 'lifestate_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,19 +17,36 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Brightness brigtState = Brightness.light;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter路由及跳转方法的使用',
       theme: ThemeData(
-
+        brightness: brigtState,
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('flutter路由及跳转方法的使用'),
-        ),
-        body: RouteNavigator(),
+          appBar: AppBar(
+            title: Text('flutter路由及跳转方法的使用'),
+          ),
+          body: new RouteNavigator(
+            onChangedBack: (){
+              print('回调切换主题');
+              setState(() {
+                if(brigtState == Brightness.dark)
+                {
+                  brigtState = Brightness.light;
+                }else
+                {
+                  brigtState = Brightness.dark;
+                }
+              });
+            },
+            valueChanged: (str){
+              print('改变值---$str');
+            },
+          )
       ),
       routes: <String,WidgetBuilder>{
         'less':(BuildContext context)=>less_group_pagePage(),
@@ -36,13 +55,18 @@ class _MyAppState extends State<MyApp> {
         'gesture':(BuildContext context)=>gestureDetectorPage(),
         'res':(BuildContext context)=>resourcePage(),
         'launch':(BuildContext context)=>launchPage(),
-
+        'life':(BuildContext context)=>lifeStatePage(),
+        'appLife':(BuildContext context)=>appLifePage(),
       },
     );
   }
 }
 
+// ignore: must_be_immutable
 class RouteNavigator extends StatefulWidget {
+  final ValueChanged<String> valueChanged;
+  final VoidCallback onChangedBack;
+  RouteNavigator({this.onChangedBack,this.valueChanged});
   @override
   _RouteNavigatorState createState() => _RouteNavigatorState();
 }
@@ -57,6 +81,14 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
+            RaisedButton(
+              onPressed: (){
+                print('切换主题');
+                widget.onChangedBack();
+                widget.valueChanged('点击之后回调');
+              },
+              child: Text('切换主题'),
+            ),
             SwitchListTile(
                 title: Text('${byName?'':'不'}通过路由名跳转'),
                 value: byName, onChanged: (value) {
@@ -70,6 +102,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             _titleItem('gestureDetector(手势)与基础组件',gestureDetectorPage(),'gesture'),
             _titleItem('如何加载资源文件',resourcePage(),'res'),
             _titleItem('如何打开第三方应用',launchPage(),'launch'),
+            _titleItem('flutter中statefulWidget的生命周期',lifeStatePage(),'life'),
+            _titleItem('flutter中app的生命周期',appLifePage(),'appLife'),
+
           ],
         ),
       ),
@@ -94,4 +129,3 @@ class _RouteNavigatorState extends State<RouteNavigator> {
     );
   }
 }
-
