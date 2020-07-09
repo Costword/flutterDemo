@@ -8,6 +8,7 @@ import 'launch_page.dart';
 import 'layout_group_page.dart';
 import 'less_group_page.dart';
 import 'lifestate_page.dart';
+import 'app_camera_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,12 +24,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'flutter路由及跳转方法的使用',
       theme: ThemeData(
+//        fontFamily: 'Lato',//全局使用此字体
         brightness: brigtState,
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
           appBar: AppBar(
-            title: Text('flutter路由及跳转方法的使用'),
+            title: Text('flutter路由及跳转方法的使用',style: TextStyle(fontFamily:'Lato'),),
           ),
           body: new RouteNavigator(
             onChangedBack: (){
@@ -57,6 +59,7 @@ class _MyAppState extends State<MyApp> {
         'launch':(BuildContext context)=>launchPage(),
         'life':(BuildContext context)=>lifeStatePage(),
         'appLife':(BuildContext context)=>appLifePage(),
+        'appCamera':(BuildContext context)=>appPickerPage(),
       },
     );
   }
@@ -87,7 +90,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
                 widget.onChangedBack();
                 widget.valueChanged('点击之后回调');
               },
-              child: Text('切换主题'),
+              child: Text('切换主题ABC',style: TextStyle(fontFamily: 'Lato'),),
             ),
             SwitchListTile(
                 title: Text('${byName?'':'不'}通过路由名跳转'),
@@ -98,12 +101,13 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             }),
             _titleItem('statelessWidget与基础组件',less_group_pagePage(),'less'),
             _titleItem('statefulWidget与基础组件',statefulGroup(),'ful'),
-            _titleItem('statelessWidget与基础组件',layoutGroup(),'layout'),
+            _titleItem('layout与基础组件',layoutGroup(),'layout'),
             _titleItem('gestureDetector(手势)与基础组件',gestureDetectorPage(),'gesture'),
             _titleItem('如何加载资源文件',resourcePage(),'res'),
             _titleItem('如何打开第三方应用',launchPage(),'launch'),
             _titleItem('flutter中statefulWidget的生命周期',lifeStatePage(),'life'),
             _titleItem('flutter中app的生命周期',appLifePage(),'appLife'),
+            _titleItem('flutter中调用相册',appPickerPage(),'appCamera'),
 
           ],
         ),
