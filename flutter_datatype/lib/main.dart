@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterdatatype/resouse_page.dart';
 import 'package:flutterdatatype/stateful_group_page.dart';
 
+import 'animation_HeroRadial_page.dart';
+import 'animation_Hero_page.dart';
+import 'animation_group_page.dart';
 import 'gestureDetector_page.dart';
 import 'launch_page.dart';
 import 'layout_group_page.dart';
@@ -36,6 +39,9 @@ class _MyAppState extends State<MyApp> {
         'gesture':(BuildContext context)=>gestureDetectorPage(),
         'res':(BuildContext context)=>resourcePage(),
         'launch':(BuildContext context)=>launchPage(),
+        'animation':(BuildContext context)=>animationGroupPage(),
+        'animationHero':(BuildContext context)=>animationHeroPage(),
+        'animationHeroRadial':(BuildContext context)=>animationHeroRadialPage(),
 
       },
     );
@@ -70,6 +76,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             _titleItem('gestureDetector(手势)与基础组件',gestureDetectorPage(),'gesture'),
             _titleItem('如何加载资源文件',resourcePage(),'res'),
             _titleItem('如何打开第三方应用',launchPage(),'launch'),
+            _titleItem('简单的动画效果',animationGroupPage(),'animation'),
+            _titleItem('简单的Hero动画效果',animationHeroPage(),'animationHero'),
+            _titleItem('简单的Hero镜像动画效果',animationHeroRadialPage(),'animationHeroRadial'),
           ],
         ),
       ),
@@ -94,4 +103,3 @@ class _RouteNavigatorState extends State<RouteNavigator> {
     );
   }
 }
-
