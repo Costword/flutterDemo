@@ -5,6 +5,10 @@ import 'package:flutterdatatype/stateful_group_page.dart';
 
 import 'animation_page.dart';
 import 'app_lifeCycle.dart';
+import 'animation_HeroRadial_page.dart';
+import 'animation_Hero_page.dart';
+import 'animation_group_page.dart';
+>>>>>>> master
 import 'gestureDetector_page.dart';
 import 'images_page.dart';
 import 'launch_page.dart';
@@ -66,6 +70,10 @@ class _MyAppState extends State<MyApp> {
         'refresh':(BuildContext context)=>pullToRefreshPage(),
         'loadimg':(BuildContext context)=>imagesPage(),
         'animation':(BuildContext context)=>animationPage(),
+        'animation':(BuildContext context)=>animationGroupPage(),
+        'animationHero':(BuildContext context)=>animationHeroPage(),
+        'animationHeroRadial':(BuildContext context)=>animationHeroRadialPage(),
+
       },
     );
   }
@@ -117,6 +125,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             _titleItem('刷新列表',pullToRefreshPage(),'refresh'),
             _titleItem('加载图片',imagesPage(),'loadimg'),
             _titleItem('动画示例',animationPage(),'animation'),
+            _titleItem('简单的动画效果',animationGroupPage(),'animation'),
+            _titleItem('简单的Hero动画效果',animationHeroPage(),'animationHero'),
+            _titleItem('简单的Hero镜像动画效果',animationHeroRadialPage(),'animationHeroRadial'),
           ],
         ),
       ),
