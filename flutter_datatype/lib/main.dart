@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdatatype/refresh_page.dart';
 import 'package:flutterdatatype/resouse_page.dart';
 import 'package:flutterdatatype/stateful_group_page.dart';
 
+import 'animation_page.dart';
 import 'app_lifeCycle.dart';
 import 'gestureDetector_page.dart';
+import 'images_page.dart';
 import 'launch_page.dart';
 import 'layout_group_page.dart';
 import 'less_group_page.dart';
@@ -60,6 +63,9 @@ class _MyAppState extends State<MyApp> {
         'life':(BuildContext context)=>lifeStatePage(),
         'appLife':(BuildContext context)=>appLifePage(),
         'appCamera':(BuildContext context)=>appPickerPage(),
+        'refresh':(BuildContext context)=>pullToRefreshPage(),
+        'loadimg':(BuildContext context)=>imagesPage(),
+        'animation':(BuildContext context)=>animationPage(),
       },
     );
   }
@@ -108,7 +114,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             _titleItem('flutter中statefulWidget的生命周期',lifeStatePage(),'life'),
             _titleItem('flutter中app的生命周期',appLifePage(),'appLife'),
             _titleItem('flutter中调用相册',appPickerPage(),'appCamera'),
-
+            _titleItem('刷新列表',pullToRefreshPage(),'refresh'),
+            _titleItem('加载图片',imagesPage(),'loadimg'),
+            _titleItem('动画示例',animationPage(),'animation'),
           ],
         ),
       ),
